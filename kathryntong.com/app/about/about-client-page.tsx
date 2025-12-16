@@ -18,14 +18,12 @@ export default function AboutClientPage() {
           {/* Hero Section */}
           <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
             <div>
-              <h1 className="text-4xl font-bold text-foreground mb-6">{t.about?.title || "About Kathryn"}</h1>
+              <h1 className="text-4xl font-bold text-foreground mb-6">{t.aboutTitle}</h1>
               <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-                {t.about?.bio1 ||
-                  "With over 10 years of professional notary experience, Kathryn has established herself as a trusted and reliable notary public serving the California community. Her commitment to excellence and customer satisfaction has made her the go-to choice for individuals and businesses alike."}
+                {t.aboutBio1}
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                {t.about?.bio2 ||
-                  "Kathryn specializes in mobile notary services, apostille certification, and legalization services. She understands that every client has unique needs, which is why she offers flexible scheduling and personalized service tailored to your specific requirements."}
+                {t.aboutBio2}
               </p>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">

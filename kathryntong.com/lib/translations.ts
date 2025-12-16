@@ -282,6 +282,11 @@ export const translations = {
     chatbotSpeedResponse: "Most notarizations can be completed same-day! For expedited services, we offer rush processing with an additional fee.",
     chatbotPaymentResponse: "We accept cash, card, and digital payments. Pricing varies by service type, but our rates are transparent with no hidden fees.",
     chatbotDefaultResponse: "Great question! For more detailed information, please visit our services page or call us at 626.590.3560. We're here to help!",
+
+    // About Page
+    aboutTitle: "About Kathryn",
+    aboutBio1: "With over 10 years of professional notary experience, Kathryn has established herself as a trusted and reliable notary public serving the California community. Her commitment to excellence and customer satisfaction has made her the go-to choice for individuals and businesses alike.",
+    aboutBio2: "Kathryn specializes in mobile notary services, apostille certification, and legalization services. She understands that every client has unique needs, which is why she offers flexible scheduling and personalized service tailored to your specific requirements.",
   },
   zh: {
     // Header
@@ -548,6 +553,11 @@ export const translations = {
     chatbotSpeedResponse: "大多数公证可以当天完成！对于加急服务，我们提供快速处理，需要额外费用。",
     chatbotPaymentResponse: "我们接受现金、卡和数字支付。定价因服务类型而异，但我们的费率透明，没有隐藏费用。",
     chatbotDefaultResponse: "好问题！有关更详细的信息，请访问我们的服务页面或致电626.590.3560。我们随时为您提供帮助！",
+
+    // About Page
+    aboutTitle: "关于Kathryn",
+    aboutBio1: "Kathryn拥有超过10年的专业公证经验，已成为服务加州社区的值得信赖和可靠的公证人。她对卓越和客户满意度的承诺使她成为个人和企业的首选。",
+    aboutBio2: "Kathryn专门从事移动公证服务、认证证书和合法化服务。她了解每个客户都有独特的需求，这就是为什么她提供灵活的时间安排和根据您的具体要求量身定制的个性化服务。",
   },
 }
 
