@@ -133,7 +133,7 @@ export default function OtherStatesPage() {
               <div className="border border-border rounded-lg p-8 bg-card">
                 <h3 className="text-xl font-bold text-foreground mb-4">Apostille Service</h3>
                 <div className="mb-6">
-                  <span className="text-3xl font-bold text-primary">$150</span>
+                  <span className="text-3xl font-bold text-primary">$160</span>
                   <span className="text-muted-foreground ml-2">1st document</span>
                 </div>
                 <ul className="space-y-3">

@@ -4,16 +4,19 @@ import type React from "react"
 
 import { MessageCircle, X, Send } from "lucide-react"
 import { useTranslations } from "@/lib/use-translations"
+import { useLanguage } from "@/lib/language-context"
 
 type Message = {
   id: number
   text: string
   sender: "bot" | "user"
   timestamp: Date
+  role?: "system" | "user" | "assistant"
 }
 
 export default function Chatbot() {
   const t = useTranslations()
+  const { language } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -21,6 +24,7 @@ export default function Chatbot() {
       text: "",
       sender: "bot",
       timestamp: new Date(),
+      role: "assistant",
     },
   ])
   const [input, setInput] = useState("")
@@ -49,45 +53,76 @@ export default function Chatbot() {
     e.preventDefault()
     if (!input.trim()) return
 
-    const userMessage = {
+    const userMessage: Message = {
       id: messages.length + 1,
       text: input,
       sender: "user" as const,
       timestamp: new Date(),
+      role: "user",
     }
 
     setMessages((prev) => [...prev, userMessage])
+    const currentInput = input
     setInput("")
     setIsLoading(true)
 
-    // Simulate bot response delay
-    setTimeout(() => {
-      const botResponses: { [key: string]: string } = {
-        price: t.chatbotPriceResponse,
-        hours: t.chatbotHoursResponse,
-        document: t.chatbotDocumentResponse,
-        apostille: t.chatbotApostilleResponse,
-        legalization: t.chatbotLegalizationResponse,
-        speed: t.chatbotSpeedResponse,
-        payment: t.chatbotPaymentResponse,
-        default: t.chatbotDefaultResponse,
+    try {
+      // Prepare messages for API (exclude welcome message)
+      const apiMessages = messages
+        .filter((msg) => msg.id !== 1)
+        .map((msg) => ({
+          role: msg.role || (msg.sender === "user" ? "user" : "assistant"),
+          content: msg.text,
+        }))
+
+      // Add current user message
+      apiMessages.push({
+        role: "user",
+        content: currentInput,
+      })
+
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: apiMessages,
+          language: language,
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to get response")
       }
 
-      const lowerInput = input.toLowerCase()
-      const response =
-        Object.entries(botResponses).find(([key]) => lowerInput.includes(key))?.[1] || botResponses.default
+      const data = await response.json()
 
       setMessages((prev) => [
         ...prev,
         {
           id: prev.length + 1,
-          text: response,
+          text: data.response,
           sender: "bot",
           timestamp: new Date(),
+          role: "assistant",
         },
       ])
+    } catch (error) {
+      console.error("Chat error:", error)
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          text: t.chatbotDefaultResponse,
+          sender: "bot",
+          timestamp: new Date(),
+          role: "assistant",
+        },
+      ])
+    } finally {
       setIsLoading(false)
-    }, 500)
+    }
   }
 
   return (
