@@ -1,6 +1,0 @@
-{
-  "buildCommand": "cd kathryntong.com && npm run build",
-  "outputDirectory": "kathryntong.com/.next",
-  "installCommand": "cd kathryntong.com && npm install"
-}
-
